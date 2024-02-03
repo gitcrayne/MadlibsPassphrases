@@ -140,4 +140,4 @@ while xcount < int(xnum):    # Sets up the while loop so that the script iterate
     xcount += 1                     # Adds 1 to the count of xcount for displaying the proper number of passphrases.
     print('\t{}'.format(phrase))    # Prints the passphrase.
     
-print("\nDone! You created ", xnum, "memorable passphrases with Madlibs Passphrases!\n")
+print("\nDone! You created", xnum, "memorable passphrases with Madlibs Passphrases!\n")
