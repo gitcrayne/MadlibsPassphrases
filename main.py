@@ -1,14 +1,13 @@
 #!/usr/bin/env python3
 
-import random # Calls the 'random' function
-import math
+import random   # Calls the 'random' function
+import math     # Calls the 'math' function
 
-xcount = 0
+xcount = 0      # Sets the count used for how many passphrases will be generated to 0.
 
 # Provides initial context to the user to explain the purpose of the script.
 print ("\n\nIn order to prevent account compromise, a strong password should be used. A \nnumber of variables can be used to determine password strength. This script \nevaluates the strength of a user-provided password based on entropy (number, \nfrequency, and type of characters) and checks the password against a file with \naround a million of the most commonly used passwords. Once the strength of the \npassword has been evaluated, you will have the opportunity some easy to \nremember passphrases.\n\n")
-upwd = input("Enter the password you would like to check: ")
-
+upwd = input("Enter the password you would like to check: ")    # Gets the user-generated password.
 
 def calculate_password_entropy(upwd):
    """Calculates the entropy of a upwd.
@@ -34,15 +33,13 @@ def calculate_password_entropy(upwd):
 
 def check_password_in_file(upwd):
     """Checks if a user-inputted password is present in a given file."""
-
-    with open("common_passwords.txt", 'r') as file:
-        common_passwords = file.read().splitlines()  # Read passwords into a list
-
-    if upwd in common_passwords:
-        commonpwd = -5
-    else:
-        commonpwd = 0
-    return commonpwd
+    with open("common_passwords.txt", 'r') as file:     # Opens the common passwords text file for reading.
+        common_passwords = file.read().splitlines()     # Read passwords into a list
+    if upwd in common_passwords:        # Checks to see if the user-generated password is in the common passwords text file.
+        commonpwd = -5                  # If yes, set common password variable to -5 (this makes certain the score is negative)
+    else:                               # If the user-generated password is *not* in the file of common passwords...
+        commonpwd = 0                   # if not, set the common password variable to 0, insuring this does not impact entropy.
+    return commonpwd                    # Returns the value of 'common password' so that it can be used in the rest of the program.
 
 
 def get_word(file):
@@ -57,42 +54,44 @@ def get_word(file):
 
 commonpwd = check_password_in_file(upwd)                # Brings the commonpwd variable out of the function
 entropy = round(calculate_password_entropy(upwd), 2)    # Brings the entropy variable out of the function and rounds it to two decimal places.
-pwdscore = round(float(entropy) + int(commonpwd),2)     # Calculates the password score by adding 
+pwdscore = round(float(entropy) + int(commonpwd),2)     # Calculates the password score by adding entropy and common password score
 
-# Following lines are used for testing of the script.
-# print(f"Password: {upwd}, Common: {commonpwd}, Entropy: {entropy:.2f}")  # Formats the variables within a string and presents them to the user.
-# print("Final password score: ", pwdscore)
+""" The following lines are used for debugging.
+print(f"Password: {upwd}, Common: {commonpwd}, Entropy: {entropy:.2f}")  # Formats the variables within a string and presents them to the user.
+print("Final password score: ", pwdscore)
+"""
 
-if pwdscore < 0:
+if pwdscore < 0:    # if combined password score is less than zero, let the user know that their password was in the common passwords list.
     print("Your password was found in a list of the top one million most common passwords.\n")
-elif pwdscore < 2:
+elif pwdscore < 2:  # if combined password score is less than two, let the user know that their password is extremely weak (entering 'a' or similar gets this result)
     print("Your password is quite weak, likely due to repeated characters or not using enough character types.\n")
-elif pwdscore < 3:
+elif pwdscore < 3:  # if combined password score is less than two, let the user know that their password is weak (bcbcbc1111 or similar would get this result)
     print("Your password is weak, likely due to repeated characters or not using enough character types.\n")
-elif pwdscore < 4:
+elif pwdscore < 4:  # if combined password score is less than two, let the user know that their password is moderately strong (a password like jackrabbit9876 might get this result)
     print("Your password is of moderate strength, something that can be helped with added complexity.\n")
-elif pwdscore < 5:
+elif pwdscore < 5:  # if combined password score is less than two, let the user know that their password is strong (a password like GitMaster1944! and the generated passphrases from this program would get this response). 
     print("Your password is strong, but may not be that easy to remember.\n")
-else:
+else:               # If password score is higher than 5, it's a very strong password. Very few passwords hit this number.
     print("Your password is extremely strong. Congratulations! A passphrase may make it easier for you to remember.\n")
 
 # Provides information to the user about passphrases and why they're used.
 print ("A strong password is instrumental in security. One way to have a strong,\nmemorable password is to use a passphrase instead. A passphrase is a group of\nwords that are joined by a special character like '.', '-', or '_'. While a\npassphrase can contain random words, using natural structure to build memorable\nsentence can help. This script creates memorable passphrases with a four-digit\nnumber for additional strength.\n")
+# Sets up the possibilities for how many passphrases can be created and adds them to a list. There is a better way to do this, but there were debugging issues.
 xnumlist = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"]
+# Asks the user how many passphrases should be created and stores the number as a string in a variable.
 xnum = input ("How many passphrases would you like to produce? Enter an integer between 1 and 20, anything else to quit: ")
-if xnum in xnumlist:
-    print("If you would like to choose a separator, choose from one of the following. Otherwise, press enter: - _ / ! . ^ & ,")
+if xnum in xnumlist:    # Checks to make certain the 'number' provided by the user is in the list. If yes, continues. If not, ends the program.
+    # Creates a list of separators to compare user input against.
     seplist = ["-", "_", "/", "!", ".", "^", "&", ",", "\\"]
-    sep = input("If you would like to choose a separator, choose from one of the following, else press enter. ")
-    if sep in seplist:
-        sep = sep
-        print("You chose:", sep)
-    else:
-        
-        sep = random.choice(seplist)
-        print("\nYour random separator is:", sep, "\n")
-else:
-    print("Done!")
+    # Takes the input of the user to choose a separator.
+    sep = input("If you would like to choose a separator, choose from one of the following. Otherwise, press enter: - _ / ! . ^ & ,")
+    if sep in seplist:              # Checks if user inputed separator is in the list of available characters.
+        sep = sep                   # Leaves the variable as-is when the character is present.
+    else:                           # If the user input is not in the list of choices...
+        sep = random.choice(seplist)    # Assigns a random character from the list to the separator variable.
+        print("\nYour random separator is:", sep, "\n") # Informs the user of the random character chosen as a separator.
+else:   # If the user did not choose a number from the list of possible choices for how many passphrases should be created...
+    print("Done!")  # End the program and let the user know it's finished.
 
 while xcount < int(xnum):    # Sets up the while loop so that the script iterates through 5 passphrases.
     adj = 'adjectives.txt'                  # Assigns the list of adjectives to the variable 'adj'
@@ -139,5 +138,6 @@ while xcount < int(xnum):    # Sets up the while loop so that the script iterate
     phrase = sep.join(phrase)       # Creates the formatting for the passphrase.
     xcount += 1                     # Adds 1 to the count of xcount for displaying the proper number of passphrases.
     print('\t{}'.format(phrase))    # Prints the passphrase.
-    
+
+# Lets the user know the program has ended and says how many passphrases were created.
 print("\nDone! You created", xnum, "memorable passphrases with Madlibs Passphrases!\n")
