@@ -19,23 +19,41 @@ The program uses patterns to determine sentence structure. Language is made up o
 
 Patterns are chosen randomly, and when a user tells the program how many passphrases they want created, it will iterate through random patterns in a list to provide a variety of passphrases, generally from three to five words long, using a separator between each word and appending a number at the end.
 •	Mia-Scrapes-Crafts-1188
+
 •	Austin\Shelters\Pallidly\Beside\Switches\1003
+
 •	Chase_Earns_Showers_9426
+
 •	Spotted.Mixes.Renovate.Northeasterly.But.Trevor.4212
+
 •	Sybil&Utters&Pleasantly&Regarding&Rivers&6840
+
 •	Abe!Strikes!Briefs!4955
+
 •	Brainy^Safes^Scope^Selfishly^Over^Eloise^8195
+
 •	Rotating+Hunts+Hesitate+Formally+Closeby+Juanita+2118
-•	Finn*Does*Unhealthily*Considering*Maps*400
+
+•	Finn\*Does\*Unhealthily\*Considering\*Maps\*400
+
 •	Sonia|Mutates|Squiggly|Friends|7288
-•	Pia`Receives`Emotionlessly`Till`Emphases`7588
-•	Mordecai~Jousts~Sparkling~Bids~3165
+
+•	Pia\`Receives\`Emotionlessly\`Till\`Emphases\`7588
+
+•	Mordecai\~Jousts\~Sparkling\~Bids\~3165
+
 •	Dana=Scales=Uncomfortably=Aboard=Detectives=1901
+
 •	Boundless@Armies@Procure@Gaspingly@Opposite@Ryan@9798
+
 •	Sergei$Enters$Lungs$4577
+
 •	Sniveling#Angles#Bust#Accidentally#Save#Kylie#6773
+
 •	Olympia,Needles,Fondly,Against,Coyotes,5171
+
 •	Anita%Hustles%Proper%Initiatives%224
+
 
 Users are also able to choose a separator from a list of 18 special characters. Should they enter anything other than one of the choices in the string, the program will choose one randomly to apply to all passphrases created.
 
