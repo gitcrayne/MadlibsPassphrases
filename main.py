@@ -84,60 +84,61 @@ if xnum in xnumlist:    # Checks to make certain the 'number' provided by the us
     # Creates a list of separators to compare user input against.
     seplist = ["-", "_", "/", "!", ".", "^", "&", ",", "\\", "|", "@", "#", "$", "%", "*", "=", "+", "~"]
     # Takes the input of the user to choose a separator.
-    sep = input("If you would like to choose a separator, choose from one of the following. Otherwise, press enter: - _ / ! . ^ & , \\ | @ # $ % * = + ~")
+    sep = input("If you would like to choose a separator, choose from one of the following. Otherwise, press enter:\n - _ / ! . ^ & , \\ | @ # $ % * = + ~ \nWhat separator would you like to use? ")
     if sep in seplist:              # Checks if user inputed separator is in the list of available characters.
         sep = sep                   # Leaves the variable as-is when the character is present.
+        print()                     # Adds a blank line for readability.
     else:                           # If the user input is not in the list of choices...
         sep = random.choice(seplist)    # Assigns a random character from the list to the separator variable.
         print("\nYour random separator is:", sep, "\n") # Informs the user of the random character chosen as a separator.
 else:   # If the user did not choose a number from the list of possible choices for how many passphrases should be created...
-    print("Done!")  # End the program and let the user know it's finished.
+    pass    # Passes to the exception.
+try:
+    while xcount < int(xnum):    # Sets up the while loop so that the script iterates through 5 passphrases.
+        adj = 'adjectives.txt'                  # Assigns the list of adjectives to the variable 'adj'
+        adv = 'adverbs.txt'                     # Assigns the list of adverbs to the variable 'adv'
+        name = 'names.txt'                      # Assigns the list of proper names to the variable 'name'
+        noun = 'nouns.txt'                      # Assigns the list of nouns to the variable 'noun'
+        prep = 'prepositions.txt'               # Assigns the list of prepositions to the variable 'prep'
+        pverb = 'plural-verbs.txt'              # Assigns the list of plural verbs to the variable 'pverb'
+        sverb = 'singular-verbs.txt'            # Assigns the list of singular verbs to the variable 'sverb'
+        num = str(random.randint(0000,9999))    # Chooses a random number from 0 to 9999 and turns it into a string for appending to the passphrase
 
-while xcount < int(xnum):    # Sets up the while loop so that the script iterates through 5 passphrases.
-    adj = 'adjectives.txt'                  # Assigns the list of adjectives to the variable 'adj'
-    adv = 'adverbs.txt'                     # Assigns the list of adverbs to the variable 'adv'
-    name = 'names.txt'                      # Assigns the list of proper names to the variable 'name'
-    noun = 'nouns.txt'                      # Assigns the list of nouns to the variable 'noun'
-    prep = 'prepositions.txt'               # Assigns the list of prepositions to the variable 'prep'
-    pverb = 'plural-verbs.txt'              # Assigns the list of plural verbs to the variable 'pverb'
-    sverb = 'singular-verbs.txt'            # Assigns the list of singular verbs to the variable 'sverb'
-    num = str(random.randint(0000,9999))    # Chooses a random number from 0 to 9999 and turns it into a string for appending to the passphrase
+        # Creates the pattern for determining sentence structure
+        patterns = [
+            ['a', 'n', 'v', 'd', 'p', 'm', 'u' ],   # adjective noun pluralVerb adverb preposition name number
+            ['m', 's', 'd', 'p', 'n', 'u' ],        # name singularVerb adverb preposition noun number
+            ['m', 's', 'a', 'n', 'u' ],             # name singularVerb adverb noun number
+            ['m', 's', 'n', 'u']                    # name singularVerb noun number
+        ]
 
-    # Creates the pattern for determining sentence structure
-    patterns = [
-        ['a', 'n', 'v', 'd', 'p', 'm', 'u' ],   # adjective noun pluralVerb adverb preposition name number
-        ['m', 's', 'd', 'p', 'n', 'u' ],        # name singularVerb adverb preposition noun number
-        ['m', 's', 'a', 'n', 'u' ],             # name singularVerb adverb noun number
-        ['m', 's', 'n', 'u']                    # name singularVerb noun number
-    ]
+        # Iterates through each pattern to create the proper order of words and adds it to the phrase variable.
+        phrase = []                             # Creates an empty list to store the generated phrase.
+        for p in random.choice(patterns):       # Randomly selects one pattern from a list called patterns and iterates over its characters.
+            p = p                               # Initializes the variable that will hold the generated word.
+            if p == 'a':                        # If the next item in the pattern is an adjective...
+                phrase.append(get_word(adj))    # Calls the get_word function to retrieve a random word from the adjectives.txt text file.
+            elif p == 'd':                      # If the next item in the pattern is an adverb...
+                phrase.append(get_word(adv))    # Calls the get_word function to retrieve a random word from the adverbs.txt text file.
+            elif p == 'm':                      # If the next item in the pattern is a name...
+                phrase.append(get_word(name))   # Calls the get_word function to retrieve a random word from the names.txt text file.
+            elif p == 'n':                      # If the next item in the pattern is a noun...
+                phrase.append(get_word(noun))   # Calls the get_word function to retrieve a random word from the nouns.txt text file.
+            elif p == 'p':                      # If the next item in the pattern is a preposition...
+                phrase.append(get_word(prep))   # Calls the get_word function to retrieve a random word from the prepositions.txt text file.
+            elif p == 's':                      # If the next item in the pattern is a singular verb...
+                phrase.append(get_word(sverb))  # Calls the get_word function to retrieve a random word from the singular-verbs.txt text file.
+            elif p == 'v':                      # If the next item in the pattern is a plural verb...
+                phrase.append(get_word(pverb))  # Calls the get_word function to retrieve a random word from the verbs.txt text file.
+            elif p == 'u':                      # If the next item in the pattern is a number...
+                phrase.append(num)              # Appends the num variable to the phrase.
+            else:                               # If the pattern has been fully iterated through...
+                pass                            # Does nothing since the pattern has been fully iterated through so that the program can move to the next bit of code.
 
-
-    # Iterates through each pattern to create the proper order of words and adds it to the phrase variable.
-    phrase = []                             # Creates an empty list to store the generated phrase.
-    for p in random.choice(patterns):       # Randomly selects one pattern from a list called patterns and iterates over its characters.
-        p = p                               # Initializes the variable that will hold the generated word.
-        if p == 'a':                        # If the next item in the pattern is an adjective...
-            phrase.append(get_word(adj))    # Calls the get_word function to retrieve a random word from the adjectives.txt text file.
-        elif p == 'd':                      # If the next item in the pattern is an adverb...
-            phrase.append(get_word(adv))    # Calls the get_word function to retrieve a random word from the adverbs.txt text file.
-        elif p == 'm':                      # If the next item in the pattern is a name...
-            phrase.append(get_word(name))   # Calls the get_word function to retrieve a random word from the names.txt text file.
-        elif p == 'n':                      # If the next item in the pattern is a noun...
-            phrase.append(get_word(noun))   # Calls the get_word function to retrieve a random word from the nouns.txt text file.
-        elif p == 'p':                      # If the next item in the pattern is a preposition...
-            phrase.append(get_word(prep))   # Calls the get_word function to retrieve a random word from the prepositions.txt text file.
-        elif p == 's':                      # If the next item in the pattern is a singular verb...
-            phrase.append(get_word(sverb))  # Calls the get_word function to retrieve a random word from the singular-verbs.txt text file.
-        elif p == 'v':                      # If the next item in the pattern is a plural verb...
-            phrase.append(get_word(pverb))  # Calls the get_word function to retrieve a random word from the verbs.txt text file.
-        elif p == 'u':                      # If the next item in the pattern is a number...
-            phrase.append(num)              # Appends the num variable to the phrase.
-        else:                               # If the pattern has been fully iterated through...
-            pass                            # Does nothing since the pattern has been fully iterated through so that the program can move to the next bit of code.
-
-    phrase = sep.join(phrase)       # Creates the formatting for the passphrase.
-    xcount += 1                     # Adds 1 to the count of xcount for displaying the proper number of passphrases.
-    print('\t{}'.format(phrase))    # Prints the passphrase.
-
-# Lets the user know the program has ended and says how many passphrases were created.
-print("\nDone! You created", xnum, "memorable passphrases with Madlibs Passphrases!\n")
+        phrase = sep.join(phrase)       # Creates the formatting for the passphrase.
+        xcount += 1                     # Adds 1 to the count of xcount for displaying the proper number of passphrases.
+        print('\t{}'.format(phrase))    # Prints the passphrase.
+    # Lets the user know the program has ended and says how many passphrases were created.
+    print("\nDone! You created", xnum, "memorable passphrases with Madlibs Passphrases!\n")
+except:
+    print("\nDone!\n")
