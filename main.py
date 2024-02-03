@@ -82,9 +82,9 @@ xnumlist = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13",
 xnum = input ("How many passphrases would you like to produce? Enter an integer between 1 and 20, anything else to quit: ")
 if xnum in xnumlist:    # Checks to make certain the 'number' provided by the user is in the list. If yes, continues. If not, ends the program.
     # Creates a list of separators to compare user input against.
-    seplist = ["-", "_", "/", "!", ".", "^", "&", ",", "\\"]
+    seplist = ["-", "_", "/", "!", ".", "^", "&", ",", "\\", "|", "@", "#", "$", "%", "*", "=", "+", "~"]
     # Takes the input of the user to choose a separator.
-    sep = input("If you would like to choose a separator, choose from one of the following. Otherwise, press enter: - _ / ! . ^ & ,")
+    sep = input("If you would like to choose a separator, choose from one of the following. Otherwise, press enter: - _ / ! . ^ & , \\ | @ # $ % * = + ~")
     if sep in seplist:              # Checks if user inputed separator is in the list of available characters.
         sep = sep                   # Leaves the variable as-is when the character is present.
     else:                           # If the user input is not in the list of choices...
